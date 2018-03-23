@@ -21,12 +21,13 @@ Adafruit_NeoPixel strip = Adafruit_NeoPixel(150, PIN, NEO_GRB + NEO_KHZ800);
 // on a live circuit...if you must, connect GND first.
 
 void setup() {
+  Serial.begin(9600);
+  
   // This is for Trinket 5V 16MHz, you can remove these three lines if you are not using a Trinket
   #if defined (__AVR_ATtiny85__)
     if (F_CPU == 16000000) clock_prescale_set(clock_div_1);
   #endif
   // End of trinket special code
-
 
   strip.begin();
   strip.show(); // Initialize all pixels to 'off'
@@ -34,12 +35,16 @@ void setup() {
 
 void loop() {
   // add your method here!
-  
+  stars(20);
   // Some example procedures showing how to display to the pixels:
+
+  /*
   colorWipe(strip.Color(255, 0, 0), 50); // Red
   colorWipe(strip.Color(0, 255, 0), 50); // Green
   colorWipe(strip.Color(0, 0, 255), 50); // Blue
-//colorWipe(strip.Color(0, 0, 0, 255), 50); // White RGBW
+  
+  //colorWipe(strip.Color(0, 0, 0, 255), 50); // White RGBW
+  
   // Send a theater pixel chase in...
   theaterChase(strip.Color(127, 127, 127), 50); // White
   theaterChase(strip.Color(127, 0, 0), 50); // Red
@@ -48,6 +53,7 @@ void loop() {
   rainbow(20);
   rainbowCycle(20);
   theaterChaseRainbow(50);
+  */
 }
 
 /*
@@ -55,6 +61,34 @@ void loop() {
   Invent a routine for the LED and implement it in at method here!
 
 */
+
+// @Ebbe Vang
+void stars(int amount)
+{
+  int stars[amount];
+
+  //set random pixels as stars
+  for (int i=0; i<amount; i++)
+  {
+    stars[i] = random(strip.numPixels());
+  }
+  
+  for (int i=100; i>=0; i--)
+  {
+    int brightness = 255 / 100*i;
+    for (int j=0; j<amount; j++)
+    { 
+      strip.setPixelColor(stars[j], strip.Color(brightness, brightness, brightness));
+    }
+    delay(15);
+    strip.show();
+  }
+    
+}
+  
+
+  
+
 
 // Fill the dots one after the other with a color
 void colorWipe(uint32_t c, uint8_t wait) {
