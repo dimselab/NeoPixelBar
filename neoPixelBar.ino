@@ -37,7 +37,7 @@ void loop() {
   runningColor(strip.Color(255,0,0), 80);
   // Some example procedures showing how to display to the pixels:
 
-  
+  /*
   colorWipe(strip.Color(255, 0, 0), 50); // Red
   colorWipe(strip.Color(0, 255, 0), 50); // Green
   colorWipe(strip.Color(0, 0, 255), 50); // Blue
@@ -52,8 +52,10 @@ void loop() {
   rainbow(20);
   rainbowCycle(20);
   theaterChaseRainbow(50);
+  */
   ChristmasLights(150);
   colorFireworks(10);
+  midWalker(20);
   
 }
 
