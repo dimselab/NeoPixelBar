@@ -278,29 +278,29 @@ void colorFireworks(uint8_t wait) {
   for(int i=0; i<strip.numPixels(); i++){  
     strip.clear();
     if(i<strip.numPixels()/2) {
-      strip.setPixelColor(i, istart[j]);
-      strip.setPixelColor(i-1, istart[j]);
-      strip.setPixelColor(i-2, istart[j]);
-      strip.setPixelColor(i-3, istart[j]);
-      strip.setPixelColor(i-4, istart[j]);
-      strip.setPixelColor(x, xstart[j]);
-      strip.setPixelColor(x+1, xstart[j]);
-      strip.setPixelColor(x+2, xstart[j]);
-      strip.setPixelColor(x+3, xstart[j]);
-      strip.setPixelColor(x+4, xstart[j]);
+      strip.setPixelColor(i, istart[fireworksj]);
+      strip.setPixelColor(i-1, istart[fireworksj]);
+      strip.setPixelColor(i-2, istart[fireworksj]);
+      strip.setPixelColor(i-3, istart[fireworksj]);
+      strip.setPixelColor(i-4, istart[fireworksj]);
+      strip.setPixelColor(x, xstart[fireworksj]);
+      strip.setPixelColor(x+1, xstart[fireworksj]);
+      strip.setPixelColor(x+2, xstart[fireworksj]);
+      strip.setPixelColor(x+3, xstart[fireworksj]);
+      strip.setPixelColor(x+4, xstart[fireworksj]);
     }
     else if(i>strip.numPixels()/2)
     {
-      strip.setPixelColor(i, combine[j]);
-      strip.setPixelColor(i+1, combine[j]);
-      strip.setPixelColor(i+2, combine[j]);
-      strip.setPixelColor(i+3, combine[j]);
-      strip.setPixelColor(i+4, combine[j]);
-      strip.setPixelColor(x, combine[j]);
-      strip.setPixelColor(x-1, combine[j]);
-      strip.setPixelColor(x-2, combine[j]);
-      strip.setPixelColor(x-3, combine[j]);
-      strip.setPixelColor(x-4, combine[j]);
+      strip.setPixelColor(i, combine[fireworksj]);
+      strip.setPixelColor(i+1, combine[fireworksj]);
+      strip.setPixelColor(i+2, combine[fireworksj]);
+      strip.setPixelColor(i+3, combine[fireworksj]);
+      strip.setPixelColor(i+4, combine[fireworksj]);
+      strip.setPixelColor(x, combine[fireworksj]);
+      strip.setPixelColor(x-1, combine[fireworksj]);
+      strip.setPixelColor(x-2, combine[fireworksj]);
+      strip.setPixelColor(x-3, combine[fireworksj]);
+      strip.setPixelColor(x-4, combine[fireworksj]);
     }
     x--;
     strip.show();
