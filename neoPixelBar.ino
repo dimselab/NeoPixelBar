@@ -20,9 +20,7 @@ Adafruit_NeoPixel strip = Adafruit_NeoPixel(150, PIN, NEO_GRB + NEO_KHZ800);
 // and minimize distance between Arduino and first pixel.  Avoid connecting
 // on a live circuit...if you must, connect GND first.
 
-void setup() {
-  Serial.begin(9600);
-  
+void setup() {  
   // This is for Trinket 5V 16MHz, you can remove these three lines if you are not using a Trinket
   #if defined (__AVR_ATtiny85__)
     if (F_CPU == 16000000) clock_prescale_set(clock_div_1);
@@ -36,6 +34,7 @@ void setup() {
 void loop() {
   // add your method here!
   stars(20);
+  runningColor(strip.Color(255,0,0), 80);
   // Some example procedures showing how to display to the pixels:
 
   /*
@@ -61,6 +60,18 @@ void loop() {
   Invent a routine for the LED and implement it in at method here!
 
 */
+
+// @Ebbe Vang
+void runningColor(uint32_t color, int speed)
+{
+  for(int i=0; i<strip.numPixels(); i++)
+  {
+    strip.setPixelColor(i, color);
+    strip.setPixelColor(i-1, strip.Color(0,0,0));
+    delay(100-speed);
+    strip.show();
+  }
+}
 
 // @Ebbe Vang
 void stars(int amount)
