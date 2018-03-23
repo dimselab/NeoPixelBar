@@ -174,3 +174,70 @@ uint32_t Wheel(byte WheelPos) {
   WheelPos -= 170;
   return strip.Color(WheelPos * 3, 255 - WheelPos * 3, 0);
 }
+
+// Group: dailybot (Rasmus & Mathias)
+// Should send lights from both ends towards the other end.
+void midWalker(uint8_t wait){
+ int q = strip.numPixels();
+ for (int j=0; j<4; j++){ // does 4 cycles
+   for (int i=0; i < strip.numPixels(); i++){
+     q = q -1;
+      if(i<(strip.numPixels()/2)){
+       
+      strip.setPixelColor(i, 0, 255, 0);
+                     
+    }else if(i>= (strip.numPixels()/2)){
+     
+      strip.setPixelColor(i, 0, 255, 0);
+                     
+     }
+    if(q<= (strip.numPixels()/2)){
+     
+      strip.setPixelColor(q, 0, 0, 255);
+     
+     }else if(q>= (strip.numPixels()/2)){
+       
+       strip.setPixelColor(q, 0, 0, 255);
+     }
+     
+   
+   strip.show();
+
+   delay(wait);
+   }
+ }
+}
+// Group: Niklas & Daniel
+void ChristmasLights(uint8_t wait)
+{
+  uint32_t colors[7] ;
+  colors[0] = strip.Color(255,0,0);
+  colors[1] = strip.Color(75,0,50);
+  colors[2] = strip.Color(0,0,255);
+  colors[3] = strip.Color(0,255,100);
+  colors[4] = strip.Color(0,255,0);
+  colors[5] = strip.Color(255,90,0);
+  colors[6] = strip.Color(255,50,0);
+  int counter =0;
+  for (int j = 0; j < 5; j++) {
+   for(int q=0;q<14;q++){
+      for(uint16_t i=0; i<strip.numPixels();i++) {
+          strip.setPixelColor(i+q, colors[counter]);
+          counter++;
+          if (counter == 7){
+            counter = 0;
+          }
+         }
+      strip.show();
+
+      delay(wait);
+      for(uint16_t i=0; i<strip.numPixels();i++) {
+            strip.setPixelColor(i+q, colors[counter]);
+          counter++;
+          if (counter == 7){
+            counter = 0;
+          }
+      }
+    }
+  }
+}
