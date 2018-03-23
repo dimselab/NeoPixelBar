@@ -140,3 +140,36 @@ uint32_t Wheel(byte WheelPos) {
   WheelPos -= 170;
   return strip.Color(WheelPos * 3, 255 - WheelPos * 3, 0);
 }
+
+// Group: dailybot (Rasmus & Mathias)
+// Should send lights from both ends towards the other end.
+void midWalker(uint8_t wait){
+ int q = strip.numPixels();
+ for (int j=0; j<4; j++){ // does 4 cycles
+   for (int i=0; i < strip.numPixels(); i++){
+     q = q -1;
+      if(i<(strip.numPixels()/2)){
+       
+      strip.setPixelColor(i, 0, 255, 0);
+                     
+    }else if(i>= (strip.numPixels()/2)){
+     
+      strip.setPixelColor(i, 0, 255, 0);
+                     
+     }
+    if(q<= (strip.numPixels()/2)){
+     
+      strip.setPixelColor(q, 0, 0, 255);
+     
+     }else if(q>= (strip.numPixels()/2)){
+       
+       strip.setPixelColor(q, 0, 0, 255);
+     }
+     
+   
+   strip.show();
+
+   delay(wait);
+   }
+ }
+}
