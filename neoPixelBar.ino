@@ -33,24 +33,10 @@ void setup() {
 
 void loop() {
   // add your method here!
-  strip.clear(); 
-  
-    stars(20);
-  strip.clear(); 
-  
-    runningColor(strip.Color(255,0,0), 80)
-  strip.clear(); 
-  
-    ChristmasLights(100);
-  strip.clear(); 
-  
-    colorFireworks(10);
-  strip.clear(); 
-  
-    midWalker(20);
-  strip.clear(); 
-  
-   // Some example procedures showing how to display to the pixels:
+  walkForwardBack();
+  stars(20);
+  runningColor(strip.Color(255,0,0), 80);
+  // Some example procedures showing how to display to the pixels:
 
   /*
   colorWipe(strip.Color(255, 0, 0), 50); // Red
@@ -68,7 +54,9 @@ void loop() {
   rainbowCycle(20);
   theaterChaseRainbow(50);
   */
-  
+  ChristmasLights(150);
+  colorFireworks(10);
+  midWalker(20);
 }
 
 /*
@@ -76,6 +64,61 @@ void loop() {
   Invent a routine for the LED and implement it in at method here!
 
 */
+
+// @Ebbe Vang
+void walkForwardBack()
+{
+  uint32_t red = strip.Color(255,0,0);
+  uint32_t green = strip.Color(0,255,0);
+  uint32_t blue = strip.Color(0,0,255);
+  
+  int forward = 12;
+  int backwards = 4;
+  int space = 40;
+  int delaytimer = 50;
+  for(int i=0; i<strip.numPixels(); i++)
+  {
+    // walk forward
+    for(int j=i; j<i+forward; j++)
+    {
+      strip.setPixelColor(j, red);
+      strip.setPixelColor(j+space, green);
+      strip.setPixelColor(j+space+space, blue);
+      strip.show();
+      delay(delaytimer);
+      strip.setPixelColor(j, strip.Color(0,0,0));
+      strip.setPixelColor(j+space, strip.Color(0,0,0));
+      strip.setPixelColor(j+space+space, strip.Color(0,0,0));
+      strip.show();
+    
+    }
+    
+    for(int j=i+forward; j>i+8; j--)
+    {
+      strip.setPixelColor(j, red);
+      strip.setPixelColor(j+space, green);
+      strip.setPixelColor(j+space+space, blue);
+      strip.show();
+      delay(delaytimer);
+      strip.setPixelColor(j, strip.Color(0,0,0));
+      strip.setPixelColor(j+space, strip.Color(0,0,0));
+      strip.setPixelColor(j+space+space, strip.Color(0,0,0));
+      strip.show();
+
+    }
+    
+    /*
+    // walk backwards
+    for(int j=i+forward; i<=i+forward-backwards; j++)
+    {
+      strip.setPixelColor(j, color);
+      delay(8000);
+      strip.setPixelColor(j, strip.Color(0,0,0));
+    }
+    */
+  }
+  
+}
 
 // @Ebbe Vang
 void runningColor(uint32_t color, int speed)
@@ -271,51 +314,56 @@ void ChristmasLights(uint8_t wait)
 
 //Group: Nicki, Ricco, Fabian and Tom
 //Color Fireworks
+int fireworksj = 0;
 void colorFireworks(uint8_t wait) {
-  // Defining colors
+  // colors
   uint32_t red = strip.Color(255, 0, 0);
   uint32_t yellow = strip.Color(255,90,0);
   uint32_t blue = strip.Color(0, 0, 255);
   uint32_t purple = strip.Color(75,0,50);
   uint32_t orange = strip.Color(255,50,0);
   uint32_t green = strip.Color(0, 255, 0);
-  // Arrays containing colors
+  // arrays
   uint32_t istart[3] = {red, blue, yellow};
   uint32_t xstart[3] = {yellow, red, blue};
   uint32_t combine[3]= {orange, purple, green};
   // ..........
   int x = strip.numPixels();
-  for(int j=0; j<3; j++){
-    for(int i=0; i<strip.numPixels(); i++){  
-      strip.clear();
-      if(i<strip.numPixels()/2) {
-        strip.setPixelColor(i, istart[j]);
-        strip.setPixelColor(i-1, istart[j]);
-        strip.setPixelColor(i-2, istart[j]);
-        strip.setPixelColor(i-3, istart[j]);
-        strip.setPixelColor(i-4, istart[j]);
-        strip.setPixelColor(x, xstart[j]);
-        strip.setPixelColor(x+1, xstart[j]);
-        strip.setPixelColor(x+2, xstart[j]);
-        strip.setPixelColor(x+3, xstart[j]);
-        strip.setPixelColor(x+4, xstart[j]);
-      }
-      else if(i>strip.numPixels()/2)
-      {
-        strip.setPixelColor(i, combine[j]);
-        strip.setPixelColor(i+1, combine[j]);
-        strip.setPixelColor(i+2, combine[j]);
-        strip.setPixelColor(i+3, combine[j]);
-        strip.setPixelColor(i+4, combine[j]);
-        strip.setPixelColor(x, combine[j]);
-        strip.setPixelColor(x-1, combine[j]);
-        strip.setPixelColor(x-2, combine[j]);
-        strip.setPixelColor(x-3, combine[j]);
-        strip.setPixelColor(x-4, combine[j]);
-      }
-      x--;
-      strip.show();
-      delay(wait); 
+  
+  for(int i=0; i<strip.numPixels(); i++){  
+    strip.clear();
+    if(i<strip.numPixels()/2) {
+      strip.setPixelColor(i, istart[fireworksj]);
+      strip.setPixelColor(i-1, istart[fireworksj]);
+      strip.setPixelColor(i-2, istart[fireworksj]);
+      strip.setPixelColor(i-3, istart[fireworksj]);
+      strip.setPixelColor(i-4, istart[fireworksj]);
+      strip.setPixelColor(x, xstart[fireworksj]);
+      strip.setPixelColor(x+1, xstart[fireworksj]);
+      strip.setPixelColor(x+2, xstart[fireworksj]);
+      strip.setPixelColor(x+3, xstart[fireworksj]);
+      strip.setPixelColor(x+4, xstart[fireworksj]);
     }
+    else if(i>strip.numPixels()/2)
+    {
+      strip.setPixelColor(i, combine[fireworksj]);
+      strip.setPixelColor(i+1, combine[fireworksj]);
+      strip.setPixelColor(i+2, combine[fireworksj]);
+      strip.setPixelColor(i+3, combine[fireworksj]);
+      strip.setPixelColor(i+4, combine[fireworksj]);
+      strip.setPixelColor(x, combine[fireworksj]);
+      strip.setPixelColor(x-1, combine[fireworksj]);
+      strip.setPixelColor(x-2, combine[fireworksj]);
+      strip.setPixelColor(x-3, combine[fireworksj]);
+      strip.setPixelColor(x-4, combine[fireworksj]);
+    }
+    x--;
+    strip.show();
+    delay(wait);
   }
+  fireworksj++;
+  if(fireworksj>2){
+    fireworksj = 0;
+  }
+  strip.clear(); 
 }
